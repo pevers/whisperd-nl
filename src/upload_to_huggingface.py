@@ -53,6 +53,7 @@ def upload_model_to_hub(
 
     # Create model card content
     model_card_content = f"""---
+---
 language:
 - nl
 tags:
@@ -67,7 +68,7 @@ pipeline_tag: automatic-speech-recognition
 
 # WhisperD-NL: Fine-tuned Whisper for Dutch Speech Recognition
 
-WhisperD-NL is a fine-tuned Whisper model with disfluencies trained on the Corpus Gesproken Nederlands (CGN) specifically to detect disfluencies and non-speech events.
+WhisperD-NL is a fine-tuned Whisper model with disfluencies trained on the Corpus Gesproken Nederlands (CGN) specifically to detect disfluencies, speakers and non-speech events.
 
 ## Model Details
 
@@ -75,7 +76,8 @@ WhisperD-NL is a fine-tuned Whisper model with disfluencies trained on the Corpu
 - **Language**: Dutch (nl)
 - **Task**: Automatic Speech Recognition
 - **Fine-tuning**: Corpus Gesproken Nederlands (CGN)
-- **WER**: 16.42 for disfluencies and non-speech events on whisper-large-v3
+- **Speaker Identification**: Speaker identification is implemented up to four different speakers via a tag ([S1], [S2], [S3] and [S4])
+- **WER**: 16.42 for disfluencies, speaker identification and non-speech events based on whisper-large-v3
 
 ## Usage
 
@@ -85,8 +87,8 @@ import torch
 import soundfile as sf
 
 # Load model and processor
-processor = AutoProcessor.from_pretrained("{repo_name}")
-model = AutoModelForSpeechSeq2Seq.from_pretrained("{repo_name}")
+processor = AutoProcessor.from_pretrained("pevers/whisperd-nl")
+model = AutoModelForSpeechSeq2Seq.from_pretrained("pevers/whisperd-nl")
 
 # Load and preprocess audio
 audio, sr = sf.read("path_to_dutch_audio.wav")
