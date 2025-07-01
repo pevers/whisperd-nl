@@ -4,7 +4,38 @@ WhisperD-NL is a fine-tuned Whisper model with disfluencies trained on the Corpu
 
 - ✅ Disfluencies (eh, uh, mm-hu, etc.)
 - ✅ Speech events (only laughter is supported)
-- 🧠 Achieves a WER of 16.42 with disfluencies and non-speech events on whisper-large-v3
+- ✅ Speaker identification ([S1], [S2], [S3] and [S4])
+- 🧠 Achieves a WER of 16.42 with disfluencies, speaker identification and non-speech events for the fine-tuned version of whisper-large-v3
+
+## Usage
+
+```python
+import torch
+import librosa
+from transformers import AutoProcessor, AutoModelForSpeechSeq2Seq
+
+processor = AutoProcessor.from_pretrained("pevers/whisperd-nl")
+model = AutoModelForSpeechSeq2Seq.from_pretrained("pevers/whisperd-nl")
+
+audio, sr = librosa.load("test/nl_stutter.mp3", sr=16000)
+inputs = processor(audio, sampling_rate=sr, return_tensors="pt")
+
+with torch.no_grad():
+    predicted_ids = model.generate(inputs.input_features)
+
+transcription = processor.batch_decode(predicted_ids, skip_special_tokens=False)[0]
+print(transcription)
+```
+
+Outputs:
+
+```
+[S1] ja uh d dat is niet zo makkelijk ui uit te leggen uh zeg maar. weet je?
+```
+
+## Training data
+
+
 
 ## Data
 
@@ -23,7 +54,7 @@ To start a web app and inspect the data, run:
 - "Kerncorpus" contains fonetic transcriptions
 - Laughing is encoded as "ggg", a long laugh is encoded as "ggggg", Unknown is encoded as "xxx"
 
-## Example
+## Examples
 
 File: `test/nl_stutter.mp3`
 
@@ -33,18 +64,18 @@ Output of Whisper:
 Ja, dat is niet zo makkelijk uit te leggen, zeg maar, weet je?
 ```
 
-Output of whisperd-nl:
+Output of WhisperD-NL:
 
 ```
-ja uh d dat is niet zo makkelijk uh uit te leggen uh zeg maar weet je
+[S1] ja uh d dat is niet zo makkelijk ui uit te leggen uh zeg maar. weet je?
 ```
 
 It even guessed the short stutter 'd' correctly.
 
 File: `test/nl_laughter.mp3`
 
-Output of whisperd-nl:
+Output of WhisperD-NL:
 
 ```
-ok ja moet je me meer over vertellen (laughs) dat was een ongemakkelijke lach
+[S1] oké daar moet je me meer over vertellen (laughs). wat een ongemakkelijke lach.
 ```
