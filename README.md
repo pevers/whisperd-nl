@@ -58,13 +58,13 @@ To start a web app and inspect the data, run:
 
 File: `test/nl_stutter.mp3`
 
-Output of Whisper:
+Output of whisper-large-v3:
 
 ```
 Ja, dat is niet zo makkelijk uit te leggen, zeg maar, weet je?
 ```
 
-Output of WhisperD-NL:
+Output of WhisperD-NL (large):
 
 ```
 [S1] ja uh d dat is niet zo makkelijk ui uit te leggen uh zeg maar. weet je?
@@ -74,7 +74,7 @@ It even guessed the short stutter 'd' correctly.
 
 File: `test/nl_laughter.mp3`
 
-Output of WhisperD-NL:
+Output of WhisperD-NL (large):
 
 ```
 [S1] oké daar moet je me meer over vertellen (laughs). wat een ongemakkelijke lach.
