@@ -1,6 +1,6 @@
-# whisperd-nl
+# WhisperD-NL
 
-Whisperd is a fine-tuned Whisper model with disfluencies trained on the Corpus Gesproken Nederlands (CGN).
+WhisperD-NL is a fine-tuned Whisper model with disfluencies trained on the Corpus Gesproken Nederlands (CGN).
 
 - ✅ Disfluencies (eh, uh, mm-hu, etc.)
 - ✅ Speech events (only laughter is supported)
