@@ -54,6 +54,7 @@ def upload_model_to_hub(
     # Create model card content
     model_card_content = f"""---
 ---
+---
 language:
 - nl
 tags:
@@ -68,7 +69,7 @@ pipeline_tag: automatic-speech-recognition
 
 # WhisperD-NL: Fine-tuned Whisper for Dutch Speech Recognition
 
-WhisperD-NL is a fine-tuned Whisper model with disfluencies trained on the Corpus Gesproken Nederlands (CGN) specifically to detect disfluencies, speakers and non-speech events.
+WhisperD-NL is a fine-tuned Whisper model trained on the Corpus Gesproken Nederlands (CGN) specifically to detect disfluencies, speakers and non-speech events.
 
 ## Model Details
 
